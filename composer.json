@@ -1,0 +1,14 @@
+{
+  "name": "drupal/views_horizontal_slider",
+  "type": "drupal-module",
+  "description": "Views Horizontal Slider Module",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/views_horizontal_slider",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/views_horizontal_slider",
+    "source": "http://cgit.drupalcode.org/views_horizontal_slider"
+  },
+  "require": { }
+}

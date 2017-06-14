@@ -1,0 +1,11 @@
+views_horizontal_slider:
+  css:
+    theme:
+      css/views_horizontal_slider.css: {}
+  js:
+    js/slider.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Contains views_horizontal_slider.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function views_horizontal_slider_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the views_horizontal_slider module.
+    case 'help.page.views_horizontal_slider':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Views Horizontal Slider Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function views_horizontal_slider_theme() {
+  return [
+    'views_horizontal_slider' => [
+      'variables' => ['items' => NULL, 'settings' => NULL],
+    ],
+    'views_horizontal_slider_view' => [
+      'variables' => [],
+    ],
+  ];
+}
+
+/**
+ * Implements template_preprocess_views_horizontal_slider_view().
+ */
+function template_preprocess_views_horizontal_slider_view(&$variables) {
+  $view = $variables['view'];
+  $rows = $variables['rows'];
+  $handler = $variables['view']->style_plugin;
+  $options = $handler->options;
+
+  $variables['options'] = $options;
+  $variables['#attached']['library'][] = 'views_horizontal_slider/views_horizontal_slider';
+  $variables['#attached']['drupalSettings']['views_horizontal_slider'] = $handler->options;
+
+  $variables['default_row_class'] = !empty($options['default_row_class']);
+
+  $variables['slider_row_classes'][] = [];
+
+  // Adding proper classes to row.
+  foreach ($rows as $id => $row) {
+    if (($id == 0) &&  ( $id == (($variables['options']['activated_item']) -1))) {
+      $variables['slider_row_classes'][$id] = 'hslider-first hslider-active';
+    }
+    elseif ($id == 0) {
+      $variables['slider_row_classes'][$id] = 'hslider-first';
+    }
+    elseif ($id == (($variables['options']['activated_item']) -1 )) {
+      $variables['slider_row_classes'][$id] = 'hslider-active';
+    }
+    elseif ($id == (count($rows)-1)) {
+      $variables['slider_row_classes'][$id] = 'hslider-last';
+    }
+    else {
+      $class = 'hitem-' . $id;
+      $variables['slider_row_classes'][$id] = $class;
+    }
+  }
+  template_preprocess_views_view_unformatted($variables);
+}
