@@ -44,6 +44,15 @@ class Slider extends StylePluginBase {
   protected function defineOptions() {
     $options = parent::defineOptions();
 
+    $options['animate_in']  =  array('default' => 2);
+    $options['animate_out'] =  array('default' => 2);
+    $options['min_width']   = array('default' => 160);
+    $options['max_width']   =  array('default' => 700);
+    $options['activated_item']   =  array('default' => 2);
+    $options['caption_field_name']   =  array('default' => '');
+    $options['caption_field_fadein']   =  array('default' => 2);
+    $options['caption_field_fadeout']   =  array('default' => 2);
+
     return $options;
   }
 
@@ -54,23 +63,23 @@ class Slider extends StylePluginBase {
     parent::buildOptionsForm($form, $form_state);
 
     $form['animate_in'] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Animate In'),
       '#required' => TRUE,
-      '#description' => $this->t('Specify the Animation In Speed'),
+      '#description' => $this->t('Specify the Animation In Speed in seconds'),
       '#default_value' => $this->options['animate_in'],
     );
 
     $form['animate_out'] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Animate Out'),
       '#required' => TRUE,
-      '#description' => t('Specify the Animation Out Speed'),
+      '#description' => t('Specify the Animation Out Speed in seconds'),
       '#default_value' => $this->options['animate_out'],
     );
 
     $form['min_width'] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Min Width'),
       '#required' => TRUE,
       '#description' => t('Minimum width of an image/item'),
@@ -78,7 +87,7 @@ class Slider extends StylePluginBase {
     );
 
     $form['max_width'] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Max Width'),
       '#required' => TRUE,
       '#description' => t('Maximum width of an image/item'),
@@ -86,7 +95,7 @@ class Slider extends StylePluginBase {
     );
 
     $form['activated_item'] = array(
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Active Item'),
       '#required' => FALSE,
       '#description' => t('The item that is active on page load. Start: 1 to the number of images/items you have. '),
@@ -102,16 +111,16 @@ class Slider extends StylePluginBase {
     );
 
     $form['caption_field_fadein'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Caption field Fade in speed'),
+      '#type' => 'number',
+      '#title' => $this->t('Caption field Fade in speed in seconds'),
       '#required' => FALSE,
       '#description' => t('Fade in speed '),
       '#default_value' => $this->options['caption_field_fadein'],
     );
 
     $form['caption_field_fadeout'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Caption field Fade out speed'),
+      '#type' => 'number',
+      '#title' => $this->t('Caption field Fade out speed in seconds'),
       '#required' => FALSE,
       '#description' => t('Fade out speed '),
       '#default_value' => $this->options['caption_field_fadeout'],
